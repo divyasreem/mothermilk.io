@@ -1,0 +1,29 @@
+<h2>Verifications</h2>
+
+<?php
+if(!empty($verifications)) {
+echo "<pre>";
+print_r($verifications);
+}
+		$form = $this->form;
+		$form->setAttribute('action', $this->url('verifications', array('controller' => 'index', 'action' => 'index')));
+		$form->prepare();
+		echo $this->form()->openTag($form);
+		// // echo $this->formHidden($form->get('id'));
+		// echo $this->formRow($form->get('scan'));
+		echo $this->formRow($form->get('serach_by'));
+		echo $this->formRow($form->get('start'));
+		// // echo $this->formRow($form->get('password'));
+		
+		// // echo $this->formRow($form->get('rememberme'));
+		echo $this->formSubmit($form->get('submit'));
+		echo $this->form()->closeTag();
+
+?>
+
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+    jQuery('#datetimepicker').datepicker();
+
+})
+</script>

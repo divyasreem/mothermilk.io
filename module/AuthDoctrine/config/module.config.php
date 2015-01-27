@@ -33,6 +33,17 @@ return array(
                     ),
                 ),
             ),
+            'verifications' => array(
+                 'type' => 'Zend\Mvc\Router\Http\Literal',
+                 'options' => array(
+                    'route'    => '/verifications',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Verifications\Controller',
+                        'controller'    => 'Verifications',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),
 			'auth-doctrine' => array(
 				'type'    => 'Literal',
 				'options' => array(

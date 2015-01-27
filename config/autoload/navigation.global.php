@@ -43,6 +43,14 @@ return array(
 				 'resource'   => 'AuthDoctrine\Controller\Registration', // 'mvc:admin',
 				 'privilege'	=> 'registration'
              ),
+	        array(
+                 'label' => 'Verifications', // 'Page #2',
+                 'route' => 'verifications', // 'page-2',
+				 'controller' => 'Verifications',
+				 'action'	=> 'index',
+				 'resource'   => 'Verifications\Controller\Index', // 'mvc:admin',
+				 'privilege'	=> 'verifications'
+             ),
 	    ),
 	),
 'service_manager' => array(

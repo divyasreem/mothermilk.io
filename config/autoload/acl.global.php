@@ -25,6 +25,9 @@ return array(
 				'AuthDoctrine\Controller\Logout' => array(
 					'all' => 'member'
 				),
+				'Verifications\Controller\Index' => array(
+					'all' => 'member'
+				),
 				
             )
         )
