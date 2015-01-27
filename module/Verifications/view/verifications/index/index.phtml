@@ -12,7 +12,8 @@ print_r($verifications);
 		// // echo $this->formHidden($form->get('id'));
 		// echo $this->formRow($form->get('scan'));
 		echo $this->formRow($form->get('serach_by'));
-		echo $this->formRow($form->get('start'));
+		echo $this->formRow($form->get('from'));
+		echo $this->formRow($form->get('to'));
 		// // echo $this->formRow($form->get('password'));
 		
 		// // echo $this->formRow($form->get('rememberme'));
@@ -24,7 +25,8 @@ print_r($verifications);
 <script type="text/javascript">
 var j = jQuery.noConflict();
 j(document).ready(function(){
-    j('#start').datepicker();
+    j('#from').datepicker();
+    j('#to').datepicker();
 })
     
 </script>

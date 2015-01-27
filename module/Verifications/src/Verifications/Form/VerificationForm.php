@@ -41,14 +41,25 @@ class VerificationForm extends Form
         ));
 
          $this->add(array(
-            'name' => 'start',
-            
+            'name' => 'from',
             'options' => array(
-                'label' => 'Start Date',
+                'label' => 'From',
                 'format' => 'Y-m-d H:i P',
             ),
              'attributes' => array(
-                'id' => 'start', //set selected to '1'
+                'id' => 'from', 
+                'type'  => 'DateTime',
+            )
+        ));
+
+         $this->add(array(
+            'name' => 'to',
+            'options' => array(
+                'label' => 'To',
+                'format' => 'Y-m-d H:i P',
+            ),
+             'attributes' => array(
+                'id' => 'to', 
                 'type'  => 'DateTime',
             )
         ));
