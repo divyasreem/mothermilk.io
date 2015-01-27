@@ -22,8 +22,9 @@ print_r($verifications);
 ?>
 
 <script type="text/javascript">
-    jQuery(document).ready(function(){
-    jQuery('#datetimepicker').datepicker();
-
+var j = jQuery.noConflict();
+j(document).ready(function(){
+    j('#start').datepicker();
 })
+    
 </script>
