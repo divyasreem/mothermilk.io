@@ -19,6 +19,50 @@ return array(
                         'action'        => 'index',
                     ),
                 ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/[:controller[/:action[/:id]]]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'id'         => '[0-9]*',
+                            ),
+                            'defaults' => array(
+                            ),
+                        ),
+                    ),
+                    'paginator' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/:controller/[page/:page]',
+                            'constraints' => array(
+                                'page' => '[0-9]*',
+                            ),
+                            'defaults' => array(
+                               '__NAMESPACE__' => 'Verifications\Controller',
+                                'controller'    => 'Index',
+                                'action'        => 'index',
+                            ),
+                        ),
+                    ),
+                    'paginator-doctrine' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/[page/:page]',
+                            'constraints' => array(
+                                'page' => '[0-9]*',
+                            ),
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Verifications\Controller',
+                                'controller'    => 'Index',
+                                'action'        => 'index',
+                            ),
+                        ),
+                    ),
+                ),
             ),
         ),
     ),

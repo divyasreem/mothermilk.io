@@ -3,6 +3,8 @@ namespace Verifications\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
+
+
 // before called Table now Repository Table Data Gateway
 // In Bug Entity add  @Entity(repositoryClass="BugRepository")
 // To be able to use this query logic through 

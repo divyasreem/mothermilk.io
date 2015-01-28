@@ -1,10 +1,9 @@
 <h2>Verifications</h2>
 
 <?php
-if(!empty($verifications)) {
-echo "<pre>";
-print_r($verifications);
-}
+
+// echo "<pre>";
+// print_r($paginator);
 		$form = $this->form;
 		$form->setAttribute('action', $this->url('verifications', array('controller' => 'index', 'action' => 'index')));
 		$form->prepare();
@@ -20,13 +19,37 @@ print_r($verifications);
 		echo $this->formSubmit($form->get('submit'));
 		echo $this->form()->closeTag();
 
+if(!empty($paginator)) { ?>
+	<table class="table">
+	<tr>
+		<th>entry number</th>
+		<th>scan</th>
+		<th>mrn</th>
+		<th>ts</th>
+	</tr>
+	<?php foreach ($paginator as $row) { ?>
+			<tr>
+			<td><?php  echo $row->getEntryNumber(); ?></td>
+			<td><?php  echo $row->getScan(); ?></td>
+			<td><?php  echo $row->getMrn(); ?></td>
+			<td><?php  echo $row->getTs(); ?></td>
+			</tr>
+		<?php } ?>
+</table>
+<?php }
+if(!empty($paginator)) {
+echo $this->paginationControl($this->paginator,
+                                     'Sliding', // All, Elastic, Jumping, Sliding
+                                     'search_pagination.phtml', array('route' => 'verifications/paginator-doctrine')); 
+}
+
 ?>
 
 <script type="text/javascript">
 var j = jQuery.noConflict();
 j(document).ready(function(){
-    j('#from').datepicker();
-    j('#to').datepicker();
+    j('#from').datepicker({ dateFormat: 'yy-mm-dd' });
+    j('#to').datepicker({ dateFormat: 'yy-mm-dd' });
 })
     
 </script>
