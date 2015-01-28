@@ -37,41 +37,36 @@ class IndexController extends AbstractActionController {
 
 		public function  IndexAction () {
 			$form = new VerificationForm();
+			$request = $this->getRequest();
 			$form->get('submit')->setValue('Submit');
-			$form->get('from')->setValue('2013-09-01');
+			$start = ($request->isPost())? $request->getPost('from'):date("Y-m-d"); 
+			$end = ($request->isPost())? $request->getPost('to'):date("Y-m-d"); 
+			$form->get('from')->setValue($start);
+			$form->get('to')->setValue($end);
 			$message = null;
-			$verifications = array();
 			$paginator = array();
 			$em = $this->getEntityManager();
-			$request = $this->getRequest();
-			// if ($request->isPost()) {
-				
+			
+			$c = 'Correct';
+		    $queryBuilder = $em->createQueryBuilder('verification');
+			$queryBuilder->select("i")
+			           	 ->from('Verifications\Entity\Verification', 'i')
+			           	 ->where("i.scan = :scanType AND i.ts >= :start AND i.ts <= :end")
+			             ->setParameter('scanType', $c)
+			             ->setParameter('start', $start)
+			             ->setParameter('end', $end);
+			$adapter = new DoctrinePaginator(new ORMPaginator($queryBuilder)); 
+			$paginator = new Paginator($adapter);
+			$page = 1;
+			if ($this->params()->fromRoute('page')) $page = $this->params()->fromRoute('page');
+			$paginator->setCurrentPageNumber((int)$page)
+					  ->setItemCountPerPage(10);		
 
-				$c = 'Correct';
-				$start = '2013-09-01';
-				$end = '2015-03-01';
-			    $queryBuilder = $em->createQueryBuilder('verification');
-				 $queryBuilder->select("i")
-				           	  ->from('Verifications\Entity\Verification', 'i')
-				           	  ->where("i.scan = :scanType AND i.ts >= :start AND i.ts <= :end")
-				              ->setParameter('scanType', $c)
-				              ->setParameter('start', $start)
-				              ->setParameter('end', $end);
-				$adapter = new DoctrinePaginator(new ORMPaginator($queryBuilder)); 
-				$paginator = new Paginator($adapter);
-				$page = 1;
-				if ($this->params()->fromRoute('page')) $page = $this->params()->fromRoute('page');
-				$paginator->setCurrentPageNumber((int)$page)
-						  ->setItemCountPerPage(10);		
-				
-			// }
 			return new ViewModel(array(
-					'message' => $message,
-					//'verifications'	=> $verifications,
-					'form'	=> $form,
-					'paginator' => $paginator,
-		//			'myUsers' => $myUsers
-				));
+				'message' => $message,
+				'form'	=> $form,
+				'paginator' => $paginator,
+			));
 		}
 	
 }
