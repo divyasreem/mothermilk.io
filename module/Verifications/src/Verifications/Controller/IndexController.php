@@ -5,8 +5,8 @@ namespace Verifications\Controller;
 
 use Zend\MVC\Controller\AbstractActionController;
 // Pagination
-use DoctrineModule\Paginator\Adapter\Selectable as SelectableAdapter;
-use Doctrine\Common\Collecttions\Criteria as DoctrineCriteria; // for criteria
+// use DoctrineModule\Paginator\Adapter\Selectable as SelectableAdapter;
+// use Doctrine\Common\Collecttions\Criteria as DoctrineCriteria; // for criteria
 use Zend\Paginator\Paginator;
 
 
