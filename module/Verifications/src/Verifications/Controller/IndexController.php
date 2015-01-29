@@ -39,8 +39,8 @@ class IndexController extends AbstractActionController {
 			$form = new VerificationForm();
 			$request = $this->getRequest();
 			$form->get('submit')->setValue('Submit');
-			$start = ($request->isPost())? $request->getPost('from'):date("Y-m-d"); 
-			$end = ($request->isPost())? $request->getPost('to'):date("Y-m-d"); 
+			$start = ($request->isGet())?$this->params()->fromQuery('from',date("Y-m-d")):''; 
+			$end = ($request->isGet())? $this->params()->fromQuery('to',date("Y-m-d")):''; 
 			$form->get('from')->setValue($start);
 			$form->get('to')->setValue($end);
 			$message = null;
@@ -58,7 +58,7 @@ class IndexController extends AbstractActionController {
 			$adapter = new DoctrinePaginator(new ORMPaginator($queryBuilder)); 
 			$paginator = new Paginator($adapter);
 			$page = 1;
-			if ($this->params()->fromRoute('page')) $page = $this->params()->fromRoute('page');
+			if ($this->params()->fromQuery('page')) $page = $this->params()->fromQuery('page');
 			$paginator->setCurrentPageNumber((int)$page)
 					  ->setItemCountPerPage(10);		
 
@@ -66,6 +66,8 @@ class IndexController extends AbstractActionController {
 				'message' => $message,
 				'form'	=> $form,
 				'paginator' => $paginator,
+				 'data' => $this->params()->fromQuery()
+            
 			));
 		}
 	

@@ -3,9 +3,10 @@
 <?php
 
 // echo "<pre>";
-// print_r($paginator);
+// print_r($this->data);
 		$form = $this->form;
 		$form->setAttribute('action', $this->url('verifications', array('controller' => 'index', 'action' => 'index')));
+		$form->setAttribute('method', 'get');
 		$form->prepare();
 		echo $this->form()->openTag($form);
 		// // echo $this->formHidden($form->get('id'));
@@ -38,9 +39,14 @@ if(!empty($paginator)) { ?>
 </table>
 <?php }
 if(!empty($paginator)) {
-echo $this->paginationControl($this->paginator,
-                                     'Sliding', // All, Elastic, Jumping, Sliding
-                                     'search_pagination.phtml', array('route' => 'verifications/paginator-doctrine')); 
+	echo  $this->paginationControl($this->paginator, 'Sliding', 'search_pagination.phtml', array('data' => $this->data));
+// echo $this->paginationControl($this->paginator,
+//                                      'Sliding', // All, Elastic, Jumping, Sliding
+//                                      'search_pagination.phtml',
+//                                      'verifications/paginator-doctrine',
+//                                      array('data' => $this->data)
+                                     
+//                                       ); 
 }
 
 ?>

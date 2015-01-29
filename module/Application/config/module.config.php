@@ -100,4 +100,9 @@ return array(
             ),
         ),
     ),
+    'view_helpers' => array(
+        'invokables' => array(
+            'querypaginate_helper' => 'Application\View\Helper\QueryPaginateHelper'
+        )
+    ),
 );
