@@ -51,6 +51,14 @@ return array(
 				 'resource'   => 'Verifications\Controller\Index', // 'mvc:admin',
 				 'privilege'	=> 'verifications'
              ),
+	        array(
+                 'label' => 'Verifications Report', // 'Page #2',
+                 'route' => 'verification_report', // 'page-2',
+				 'controller' => 'Verifications',
+				 'action'	=> 'report',
+				 'resource'   => 'Verifications\Controller\Report', // 'mvc:admin',
+				 'privilege'	=> 'verifications'
+             ),
 	    ),
 	),
 'service_manager' => array(

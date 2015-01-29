@@ -70,6 +70,51 @@ class IndexController extends AbstractActionController {
             
 			));
 		}
+
+		public function reportAction() {
+			$form = new VerificationForm();
+			$request = $this->getRequest();
+			$form->get('submit')->setValue('Submit');
+			$start = $this->params()->fromQuery('from',date("Y-m-d"));
+			$end = $this->params()->fromQuery('to',date("Y-m-d"));
+			$form->get('from')->setValue($start);
+			$form->get('to')->setValue($end);
+			$paginator = array();
+			$em = $this->getEntityManager();
+			$message = null;
+		    $reports = $this->getEntityManager()->getRepository('Verifications\Entity\Verification')
+		     			->createQueryBuilder('i')
+			 			->where("i.ts >= :start AND i.ts <= :end")
+			            ->setParameter('start', $start)
+			            ->setParameter('end', $end)
+			            ->getQuery()->getResult();;
+			$final_array = array();
+			$graph_values = array();
+			foreach($reports as $report) {
+				$date = date('Y-m', strtotime($report->getTs()));
+				$final_array[$date][$report->getScan()][] = $report;
+			}
+			$x_axis = array();
+			$y_axis = array();
+			foreach ($final_array as $key => $value) {
+				array_push($x_axis, $key);
+				$y_axis['Correct_count'][] = isset($value['Correct'])?count($value['Correct']):0;
+				$y_axis['Denied_count'][] = isset($value['Denied'])?count($value['Denied']):0;
+				$y_axis['Override_count'][] = isset($value['Override'])?count($value['Override']):0;
+				// $graph_values[$key]['Correct_count'] = isset($value['Correct'])?count($value['Correct']):0;
+				// $graph_values[$key]['Denied_count'] = isset($value['Denied'])?count($value['Denied']):0;
+				// $graph_values[$key]['Override_count'] = isset($value['Override'])?count($value['Override']):0;
+			}
+			return new ViewModel(array(
+				'message' => $message,
+				'form'	=> $form,
+				'x_axis' => $x_axis,
+				'y_axis' => $y_axis,
+				'data' => $this->params()->fromQuery()
+            
+			));		
+
+		}
 	
 }
 ?>

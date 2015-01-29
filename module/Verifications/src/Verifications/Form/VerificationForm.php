@@ -41,6 +41,21 @@ class VerificationForm extends Form
         ));
 
          $this->add(array(
+            'type' => 'Zend\Form\Element\Select',
+            'name' => 'serach_by_report',
+            'options' => array(
+                'label' => 'Search By',
+                'value_options' => array(
+                    'badgeNumber' => 'Badge Number',
+                    'adLogin' => 'adLogin',
+                ),
+            ),
+            'attributes' => array(
+                'value' => '1' //set selected to '1'
+            )
+        ));
+
+         $this->add(array(
             'name' => 'from',
             'options' => array(
                 'label' => 'From',
@@ -62,6 +77,16 @@ class VerificationForm extends Form
                 'id' => 'to', 
                 'type'  => 'DateTime',
             )
+        ));
+
+         $this->add(array(
+            'name' => 'search', // 'usr_name',
+            'attributes' => array(
+                'type'  => 'text',
+            ),
+            'options' => array(
+                'label' => 'Search',
+            ),
         ));
 
         $this->add(array(

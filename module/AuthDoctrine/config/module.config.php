@@ -44,6 +44,17 @@ return array(
                     ),
                 ),
             ),
+            'verification_report' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/verification_report',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Verifications\Controller',
+                        'controller'    => 'Index',
+                        'action'        => 'report',
+                    ),
+                ),
+            ),
 			'auth-doctrine' => array(
 				'type'    => 'Literal',
 				'options' => array(

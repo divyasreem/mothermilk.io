@@ -1,0 +1,82 @@
+<h2>Verification Report</h2>
+
+<?php
+// echo "<pre>";
+//             print_r(implode(',',$x_axis));
+//              print_r($y_axis);
+//              exit();
+            
+		$form = $this->form;
+		$form->setAttribute('action', $this->url('verification_report', array('controller' => 'index', 'action' => 'report')));
+		$form->setAttribute('method', 'get');
+		$form->prepare();
+		echo $this->form()->openTag($form);
+		// // echo $this->formHidden($form->get('id'));
+		// echo $this->formRow($form->get('scan'));
+		echo $this->formRow($form->get('serach_by_report'));
+		echo $this->formRow($form->get('from'));
+		echo $this->formRow($form->get('to'));
+        echo $this->formRow($form->get('search'));
+		// // echo $this->formRow($form->get('password'));
+		
+		// // echo $this->formRow($form->get('rememberme'));
+		echo $this->formSubmit($form->get('submit'));
+		echo $this->form()->closeTag();
+
+       
+
+?>
+<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+<script type="text/javascript">
+// var j = jQuery.noConflict();
+$(document).ready(function(){
+   $('#from').datepicker({ dateFormat: 'yy-mm-dd' });
+    $('#to').datepicker({ dateFormat: 'yy-mm-dd' });
+    $('#container').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Verification Data'
+            },
+            xAxis: {
+                categories: [<?php echo join($x_axis, ',') ?>]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Verifications'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Correct',
+                data: [<?php echo join($y_axis['Correct_count'], ',') ?>]
+    
+            }, {
+                name: 'Denied',
+                data: [<?php echo join($y_axis['Denied_count'], ',') ?>]
+    
+            }, {
+                name: 'Override',
+                 data: [<?php echo join($y_axis['Override_count'], ',') ?>]
+            }]
+        });
+});
+
+
+    
+</script>

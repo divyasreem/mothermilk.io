@@ -28,7 +28,9 @@ return array(
 				'Verifications\Controller\Index' => array(
 					'all' => 'member'
 				),
-				
+				'Verifications\Controller\Report' => array (
+					'all' => 'member'
+				)
             )
         )
     )
